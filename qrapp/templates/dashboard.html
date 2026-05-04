@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="flex-direction: column;">
+
+    <h2 style="color:white;">Your QR Codes</h2>
+
+    {% for qr in qrs %}
+    <div class="qr-box">
+        <p>{{ qr.data }}</p>
+        <img src="{{ qr.image.url }}" width="150">
+        <br>
+        <a href="{{ qr.image.url }}" download>Download</a>
+    </div>
+    {% endfor %}
+
+    <a href="{% url 'home' %}">Back</a>
+
+</div>
+{% endblock %}
