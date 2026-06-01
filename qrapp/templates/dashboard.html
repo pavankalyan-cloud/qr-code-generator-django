@@ -8,6 +8,7 @@
     {% for qr in qrs %}
     <div class="qr-box">
         <p>{{ qr.data }}</p>
+        <p>Image URL:{{qr.image.url}}</p>
         <img src="{{ qr.image.url }}" width="150">
         <br>
         <a href="{{ qr.image.url }}" download>Download</a>

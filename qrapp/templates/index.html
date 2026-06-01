@@ -88,11 +88,11 @@
     </form>
 
     {% if img %}
-        <img src="{{ img.url }}">
-        <br>
-        <a href="{{ img.url }}" download>
-            <button>Download QR</button>
-        </a>
+    <img src="{{ img }}" alt="QR Code" width="250">
+    <br><br>
+    <a href="{{ img }}" download="qrcode.png">
+        <button>Download QR</button>
+    </a>
     {% endif %}
 </div>
 

@@ -51,13 +51,24 @@ def register(request):
 
 
 
+import qrcode
+from django.shortcuts import render
+from io import BytesIO
+import base64
+
 def index(request):
+    img = None
+
     if request.method == "POST":
         data = request.POST.get('data')
 
-        # generate QR here
-        img = qr_model.image  # example
+        if data:
+            qr = qrcode.make(data)
 
-        return render(request, 'index.html', {'img': img})
+            buffer = BytesIO()
+            qr.save(buffer, format="PNG")
 
-    return render(request, 'index.html')
+            img_str = base64.b64encode(buffer.getvalue()).decode()
+            img = f"data:image/png;base64,{img_str}"
+
+    return render(request, 'index.html', {'img': img})
