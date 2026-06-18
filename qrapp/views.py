@@ -1,9 +1,13 @@
-import qrcode
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .models import QRCode
+
+from rest_framework import status
 from django.core.files import File
 from io import BytesIO
+import qrcode
+
+from .models import QRCode
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def home(request):
