@@ -1,5 +1,8 @@
 __pycache__/
 *.pyc
-media/
+qr_codes/
 db.sqlite3
 .env
+venv/
+*.log
+*.sqlite3
