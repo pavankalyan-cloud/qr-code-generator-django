@@ -76,3 +76,35 @@ def index(request):
             img = f"data:image/png;base64,{img_str}"
 
     return render(request, 'index.html', {'img': img})
+
+
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+import qrcode
+from io import BytesIO
+import base64
+
+
+@api_view(["POST"])
+def generate_qr_api(request):
+    text = request.data.get("text")
+
+    if not text:
+        return Response(
+            {"error": "Please enter text"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    qr = qrcode.make(text)
+
+    buffer = BytesIO()
+    qr.save(buffer, format="PNG")
+
+    img = base64.b64encode(buffer.getvalue()).decode()
+
+    return Response({
+        "image": f"data:image/png;base64,{img}"
+    })
