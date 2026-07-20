@@ -2,9 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-
     path(
-        "register/",views.register,name="register"
+        "register/",
+        views.register,
+        name="api_register"
     ),
 
     path(
@@ -25,6 +26,9 @@ urlpatterns = [
         name="delete_qr"
     ),
 
-    path('download/<int:pk>/',views.download_qr,name = 'download_qr'),
-    
+    path(
+        "download/<int:pk>/",
+        views.download_qr,
+        name="download_qr"
+    ),
 ]
