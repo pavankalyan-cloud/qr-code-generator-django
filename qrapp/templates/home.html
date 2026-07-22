@@ -1,9 +1,23 @@
-<h2>Generate QR</h2>
-<form method="post">
-    {% csrf_token %}
-    <input type="text" name="data" placeholder="Enter text or URL" required>
-    <button type="submit">Generate</button>
-</form>
+{% extends "base.html" %}
 
-<a href="/dashboard/">View History</a>
-<a href="/logout/">Logout</a>
+{% block content %}
+<div class="container">
+    <h2>Generate QR Code</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input
+            type="text"
+            name="data"
+            placeholder="Enter text or URL"
+            required
+        >
+        <button type="submit">Generate QR</button>
+    </form>
+
+    <div class="links">
+        <a href="{% url 'dashboard' %}">View History</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</div>
+{% endblock %}
