@@ -5,17 +5,29 @@
 
     <h2 style="color:white;">Your QR Codes</h2>
 
-    {% for qr in qrs %}
-    <div class="qr-box">
-        <p>{{ qr.data }}</p>
-        <p>Image URL:{{qr.image.url}}</p>
-        <img src="{{ qr.image.url }}" width="150">
-        <br>
-        <a href="{{ qr.image.url }}" download>Download</a>
-    </div>
-    {% endfor %}
+    {% if qrs %}
+        {% for qr in qrs %}
+            <div class="qr-box">
+                <p><strong>Data:</strong> {{ qr.data }}</p>
 
-    <a href="{% url 'home' %}">Back</a>
+                {% if qr.image %}
+                    <img src="{{ qr.image.url }}" alt="QR Code" width="150">
+                    <br><br>
+                    <a href="{{ qr.image.url }}" download>Download QR Code</a>
+                {% else %}
+                    <p style="color:red;">QR image not available.</p>
+                {% endif %}
+
+                <p><small>Created: {{ qr.created_at }}</small></p>
+            </div>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p style="color:white;">You haven't generated any QR codes yet.</p>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'home' %}">← Generate New QR Code</a>
 
 </div>
 {% endblock %}
